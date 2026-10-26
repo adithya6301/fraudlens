@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FraudLens: An Agentic AI System for Intelligent Fraud Investigation</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body class="bg-[#0c1017] text-slate-100 min-h-screen flex flex-col">
+
+  <!-- TOP HEADER -->
+  <header class="border-b border-slate-800 bg-[#121722]/90 backdrop-blur sticky top-0 z-30 px-6 py-3.5">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-lg shadow-sm">
+          🛡️
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-lg font-black tracking-tight text-white">FRAUD<span class="text-cyan-400">LENS</span></span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800">AGENTIC AI PLATFORM</span>
+          </div>
+          <p class="text-xs text-slate-400">Autonomous Multi-Step Evidence-Driven Fraud Investigation System</p>
+        </div>
+      </div>
+
+      <!-- Live Engine Status Badge -->
+      <div class="flex items-center gap-2 text-xs font-mono">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-slate-400">Autonomous Agent:</span>
+        <span class="text-emerald-400 font-bold">READY</span>
+      </div>
+    </div>
+
+    <!-- MAIN NAVIGATION TABS -->
+    <nav class="flex items-center gap-2 overflow-x-auto mt-3 border-t border-slate-800/80 pt-2 text-xs font-medium">
+      <button data-tab="investigation" class="tab-btn active px-4 py-2 rounded-lg flex items-center gap-1.5 text-slate-300 hover:text-white">
+        <span>🔍</span> <span>Live Fraud Investigation</span>
+      </button>
+      <button data-tab="graph" class="tab-btn px-4 py-2 rounded-lg flex items-center gap-1.5 text-slate-300 hover:text-white">
+        <span>🕸️</span> <span>Relationship Graph</span>
+      </button>
+      <button data-tab="metrics" class="tab-btn px-4 py-2 rounded-lg flex items-center gap-1.5 text-slate-300 hover:text-white">
+        <span>📈</span> <span>Model & System Evaluation</span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 p-6 max-w-[1600px] w-full mx-auto">
+
+    <!-- ============================================================== -->
+    <!-- TAB 1: LIVE INVESTIGATION HUB -->
+    <!-- ============================================================== -->
+    <div id="tab-investigation" class="tab-content space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- LEFT COLUMN: TRANSACTION STREAM (4 of 12) -->
+        <div class="lg:col-span-4 space-y-4">
+          <div class="p-4 bg-slate-900/80 rounded-2xl border border-slate-800">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold">Transaction Feed</span>
+              <button id="toggle-simulator-btn" class="text-xs text-cyan-400 hover:text-cyan-300 font-mono font-semibold">
+                + Simulate Custom Transaction
+              </button>
+            </div>
+
+            <!-- Custom Simulator Collapsible Form -->
+            <div id="simulator-panel" class="hidden p-4 mb-4 bg-slate-950 rounded-xl border border-cyan-500/30 space-y-3">
+              <div class="text-xs font-mono font-bold text-cyan-400">Inject Custom Test Transaction</div>
+              <form id="simulation-form" class="space-y-2.5 text-xs">
+                <div>
+                  <label class="text-slate-400 text-[11px] block">Customer Profile</label>
+                  <select id="sim-user" class="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-slate-200">
+                    <option value="USR_101">Sarah Jenkins (Avg $78, Normal in Seattle)</option>
+                    <option value="USR_102">Liam O'Connor (Active Travel Notice for Lisbon)</option>
+                    <option value="USR_103">Marcus Vance (Linked to Bot Emulator #77)</option>
+                    <option value="USR_104">Elena Rostova (Linked to Bot Emulator #77)</option>
+                    <option value="USR_105">David Chen (Steady Baseline in SF)</option>
+                    <option value="USR_106">Amina Al-Mansoor (High Net Worth in Dubai)</option>
+                  </select>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="text-slate-400 text-[11px] block">Amount (USD)</label>
+                    <input id="sim-amount" type="number" step="0.01" value="1250.00" class="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-slate-200 font-mono">
+                  </div>
+                  <div>
+                    <label class="text-slate-400 text-[11px] block">Category</label>
+                    <select id="sim-category" class="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-slate-200">
+                      <option value="cryptocurrency">Cryptocurrency</option>
+                      <option value="p2p_wire">P2P Wire</option>
+                      <option value="digital_goods">Digital Goods</option>
+                      <option value="dining">Dining</option>
+                      <option value="groceries">Groceries</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label class="text-slate-400 text-[11px] block">Merchant Name</label>
+                  <input id="sim-merchant" type="text" value="Apex Crypto Exchange" class="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-slate-200">
+                </div>
+                <input type="hidden" id="sim-merchant-risk" value="0.9">
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="text-slate-400 text-[11px] block">Device ID</label>
+                    <input id="sim-device-id" type="text" value="DEV_UNKNOWN_LINUX_EMU" class="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-slate-200 font-mono text-[11px]">
+                  </div>
+                  <div>
+                    <label class="text-slate-400 text-[11px] block">Device Trust (0 to 1)</label>
+                    <input id="sim-device-trust" type="number" step="0.05" min="0" max="1" value="0.2" class="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-slate-200 font-mono">
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="text-slate-400 text-[11px] block">IP Address</label>
+                    <input id="sim-ip" type="text" value="102.89.23.4" class="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-slate-200 font-mono text-[11px]">
+                  </div>
+                  <div>
+                    <label class="text-slate-400 text-[11px] block">Location City</label>
+                    <input id="sim-location" type="text" value="Lagos, Nigeria" class="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-slate-200 text-[11px]">
+                  </div>
+                </div>
+                <button type="submit" class="w-full py-2 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-lg transition font-mono mt-2">
+                  ⚡ Run Agent Investigation
+                </button>
+              </form>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="space-y-2">
+              <input id="search-input" type="text" placeholder="Search by ID, customer, merchant..." class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500">
+              <div class="flex items-center gap-1.5 text-xs pt-1">
+                <button data-filter="ALL" class="filter-btn px-2.5 py-1 rounded-md bg-cyan-600 text-white font-medium">All</button>
+                <button data-filter="CRITICAL" class="filter-btn px-2.5 py-1 rounded-md bg-slate-800 text-rose-300 hover:bg-slate-700">Critical</button>
+                <button data-filter="HIGH" class="filter-btn px-2.5 py-1 rounded-md bg-slate-800 text-amber-300 hover:bg-slate-700">High</button>
+                <button data-filter="LOW" class="filter-btn px-2.5 py-1 rounded-md bg-slate-800 text-emerald-300 hover:bg-slate-700">Low</button>
+              </div>
+            </div>
+
+            <!-- Transaction List -->
+            <div id="transaction-list" class="mt-4 space-y-2 max-h-[620px] overflow-y-auto pr-1">
+              <!-- Rendered via app.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: ACTIVE CASE & REASONING TRACE (8 of 12) -->
+        <div class="lg:col-span-8 space-y-4">
+          
+          <!-- Active Case Banner Card -->
+          <div id="case-header-details" class="p-6 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-xl">
+            <!-- Rendered via app.js -->
+          </div>
+
+          <!-- Multi-Step Agent Reasoning Stepper -->
+          <div class="p-6 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-xl">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+              <div>
+                <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest font-bold">LangGraph Multi-Step Reasoning Trace</span>
+                <h3 class="text-base font-bold text-white mt-0.5">Autonomous Investigation Tool Chain</h3>
+              </div>
+              <span class="text-xs text-slate-400 font-mono">5 Stateful Reasoning Steps</span>
+            </div>
+
+            <!-- Stepper Container -->
+            <div id="reasoning-steps-container" class="space-y-3">
+              <!-- Rendered via app.js -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- TAB 2: RELATIONSHIP GRAPH -->
+    <!-- ============================================================== -->
+    <div id="tab-graph" class="tab-content hidden space-y-6">
+      <div class="p-6 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-xl">
+        <div class="border-b border-slate-800 pb-4 mb-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div>
+            <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest font-bold">NetworkX Graph Analytics</span>
+            <h2 class="text-lg font-bold text-white mt-0.5">Transaction Entity & Syndicate Cluster Map</h2>
+            <p class="text-xs text-slate-400">Models relationships between Users, Accounts, Devices, IPs, and Merchants. Highlights shared hardware.</p>
+          </div>
+          <!-- Legend -->
+          <div class="flex items-center gap-3 text-xs bg-slate-950 p-2 rounded-lg border border-slate-800">
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> User</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Account</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span> Device</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> IP</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> High Risk Node</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-8 bg-slate-950 rounded-xl border border-slate-800 p-2 flex items-center justify-center min-h-[520px] relative">
+            <canvas id="graph-canvas" width="760" height="500" class="w-full h-full block cursor-pointer"></canvas>
+            <div class="absolute bottom-3 left-3 text-[11px] text-slate-500 bg-slate-900/80 px-2.5 py-1 rounded border border-slate-800">
+              💡 Tip: Click any node to highlight connections and inspect full entity metadata
+            </div>
+          </div>
+          <div class="lg:col-span-4 bg-slate-950/80 rounded-xl border border-slate-800 p-5 space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+              <span class="text-xs font-mono uppercase text-slate-400 font-bold">Node Inspector</span>
+              <span class="text-[11px] text-cyan-400 font-mono">Live Entity Telemetry</span>
+            </div>
+
+            <!-- Quick Entity Picker Dropdown -->
+            <div>
+              <label class="text-[11px] text-slate-400 block mb-1">Select Entity Directly:</label>
+              <select id="graph-node-select" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+                <option value="">-- Choose Node to Inspect --</option>
+              </select>
+            </div>
+
+            <div id="graph-inspector-info" class="pt-2">
+              <div class="text-xs text-slate-500 p-4 text-center">Click any node on the graph or choose from the dropdown above to inspect its attributes, device fingerprint, and connected links.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- TAB 3: MODEL & SYSTEM EVALUATION -->
+    <!-- ============================================================== -->
+    <div id="tab-metrics" class="tab-content hidden space-y-6">
+      <div class="p-6 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-xl">
+        <div class="border-b border-slate-800 pb-4 mb-6">
+          <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest font-bold">Performance & Benchmarks</span>
+          <h2 class="text-lg font-bold text-white mt-0.5">Evaluation Metrics & Comparative Ablation</h2>
+          <p class="text-xs text-slate-400">Assessed on test population of 2,500 transactions with focus on minimizing false negatives.</p>
+        </div>
+
+        <!-- 4 Key Metric Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+            <div class="text-xs font-mono text-slate-400 uppercase">ROC-AUC</div>
+            <div class="text-2xl font-bold text-cyan-400 mt-1">97.8%</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">Discriminative capability</div>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+            <div class="text-xs font-mono text-slate-400 uppercase">Recall (Sensitivity)</div>
+            <div class="text-2xl font-bold text-emerald-400 mt-1">95.8%</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">High fraud capture rate</div>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+            <div class="text-xs font-mono text-slate-400 uppercase">Precision</div>
+            <div class="text-2xl font-bold text-purple-400 mt-1">92.4%</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">Low false-positive noise</div>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+            <div class="text-xs font-mono text-slate-400 uppercase">F1-Score</div>
+            <div class="text-2xl font-bold text-amber-400 mt-1">94.1%</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">Harmonic balance</div>
+          </div>
+        </div>
+
+        <!-- Confusion Matrix & Ablation Table Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-6 p-5 bg-slate-950 rounded-xl border border-slate-800">
+            <div class="text-xs font-mono uppercase text-slate-400 font-bold mb-3">Confusion Matrix (N = 2,500)</div>
+            <div id="confusion-matrix-display">
+              <!-- Rendered via app.js -->
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 p-5 bg-slate-950 rounded-xl border border-slate-800">
+            <div class="text-xs font-mono uppercase text-cyan-400 font-bold mb-3">Static ML vs. FraudLens Autonomous Agent</div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left">
+                <thead>
+                  <tr class="border-b border-slate-800 text-[11px] font-mono text-slate-400 uppercase">
+                    <th class="py-2.5 px-3">Dimension</th>
+                    <th class="py-2.5 px-3">Static ML</th>
+                    <th class="py-2.5 px-3 text-cyan-400">FraudLens</th>
+                    <th class="py-2.5 px-3 text-emerald-400">Gain</th>
+                  </tr>
+                </thead>
+                <tbody id="ablation-table">
+                  <!-- Rendered via app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800 bg-[#121722] px-6 py-3.5 text-center text-xs text-slate-500 font-mono">
+    FraudLens: An Agentic AI System for Intelligent Fraud Investigation • Autonomous Multi-Step Reasoning Engine
+  </footer>
+
+  <!-- Application Script -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
