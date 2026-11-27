@@ -50,7 +50,7 @@ FraudLens is an autonomous, evidence-driven fraud investigation system that tran
 
 1. Navigate to the project directory:
    ```bash
-   cd "C:\Users\Kundan Reddy\.gemini\antigravity\scratch\fraudlens"
+   cd fraudlens
    ```
 2. Start the application:
    ```bash
